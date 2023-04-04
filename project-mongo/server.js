@@ -1,8 +1,10 @@
 const express = require('express');
 const { connectToDb, getDb } = require('./db.js');
 const PORT = 3000;
+const Company = require('./company')
 
 const app = express();
+app.use(express.json());
 
 connectToDb((err) => {
     if (!err) {
@@ -20,5 +22,17 @@ connectToDb((err) => {
         console.log(`Connection error ${err}`);
     }
 });
+
+app.post('/company', (req, res) => {
+    const company = new Company(req.body);
+    company
+        .save()
+        .then((result) =>{
+            res
+                .status(201)
+                .json(result);
+        })
+        .catch((err) => console.log(res, err, 'Something went wrong'))
+})
 
 
