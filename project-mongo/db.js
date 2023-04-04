@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-
 const URL = 'mongodb://localhost:27017';
 const dbName = 'Search';
 
@@ -16,8 +15,7 @@ module.exports = {
             .catch((err) => {
                 return cb(err);
             });
-        const client = new MongoClient(URL, { useUnifiedTopology: true }); // { useUnifiedTopology: true } removes connection warnings;
-
+        const client = new MongoClient(URL, { useUnifiedTopology: true });
         client
             .connect()
             .then(
@@ -25,9 +23,23 @@ module.exports = {
                     client
                         .db(dbName)
                         .listCollections()
-                        .toArray() // Returns a promise that will resolve to the list of the collections
+                        .toArray()
             )
             .then(cols => console.log("Collections", cols))
+
+        client
+            .connect()
+            .then(client =>
+                client
+                    .db()
+                    .admin()
+                    .listDatabases()
+            )
+            .then(dbs => {
+                console.log("Mongo databases", dbs);
+            })
+
+            .finally(() => client.close());
     },
     getDb: () => dbConnection,
 };

@@ -13,14 +13,8 @@ connectToDb((err) => {
         db.listCollections().toArray((err, collections) => {
             if (err) {
                 console.log('Error getting collections:', err);
-            } else {
-                console.log('Collections in database:');
-                collections.forEach((collection) => {
-                    console.log(collection.name);
-                });
             }
         });
-
 
     } else {
         console.log(`Connection error ${err}`);
