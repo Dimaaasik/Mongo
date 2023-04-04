@@ -1,17 +1,30 @@
 const express = require('express');
-const{connectToDb, getDb} = require('./db')
+const { connectToDb, getDb } = require('./db.js');
 const PORT = 3000;
 
 const app = express();
 
 connectToDb((err) => {
-    if(!err){
-        app.listen(PORT, (err)=>{
-            err ? console.log(err) : console.log(`server work on port ${PORT}`)
-        })
-        db.getDb()
-    }
-    else{
-        console.log(`connection error ${err}`);
+    if (!err) {
+        app.listen(PORT, (err) => {
+            err ? console.log(err) : console.log(`Server works on port ${PORT}`);
+        });
+        const db = getDb();
+        db.listCollections().toArray((err, collections) => {
+            if (err) {
+                console.log('Error getting collections:', err);
+            } else {
+                console.log('Collections in database:');
+                collections.forEach((collection) => {
+                    console.log(collection.name);
+                });
+            }
+        });
+
+
+    } else {
+        console.log(`Connection error ${err}`);
     }
 });
+
+
