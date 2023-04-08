@@ -15,18 +15,9 @@ module.exports = {
             .catch((err) => {
                 return cb(err);
             });
-        const client = new MongoClient(URL, { useUnifiedTopology: true });
-        client
-            .connect()
-            .then(
-                client =>
-                    client
-                        .db(dbName)
-                        .listCollections()
-                        .toArray()
-            )
-            .then(cols => console.log("Collections", cols))
 
+
+        const client = new MongoClient(URL, { useUnifiedTopology: true })
         client
             .connect()
             .then(client =>
@@ -36,10 +27,24 @@ module.exports = {
                     .listDatabases()
             )
             .then(dbs => {
-                console.log("Mongo databases", dbs);
+
+                for(let i = 0; i < dbs.databases.length; i++){
+
+                    //console.log( dbs.databases[i]) // Показывает все базы данных
+
+                    // let dbName = dbs.databases[i].name       // Показывает все коллекции всех баз данных
+                    // client
+                    //     .db(dbName)
+                    //     .listCollections()
+                    //     .toArray()
+                    //
+                    //     .then(cols => console.log("Collections", cols))
+                }
             })
 
-            .finally(() => client.close());
+
+
     },
     getDb: () => dbConnection,
 };
+

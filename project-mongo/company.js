@@ -22,6 +22,6 @@ const companySchema = new Schema({
     }
 )
 
-const Company = mongose.model('company', companySchema)
+const Company = mongose.model('companies', companySchema)
 
 module.exports = Company
