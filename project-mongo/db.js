@@ -29,7 +29,6 @@ module.exports = {
             .then(dbs => {
 
                 for(let i = 0; i < dbs.databases.length; i++){
-
                     //console.log( dbs.databases[i]) // Показывает все базы данных
 
                     // let dbName = dbs.databases[i].name       // Показывает все коллекции всех баз данных

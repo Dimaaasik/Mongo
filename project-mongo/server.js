@@ -21,20 +21,22 @@ connectToDb((err) => {
         console.log(`Connection error ${err}`);
     }
 });
+/*app.post('/companies', (req, res) => {
+    const company = new Company(req.body);
+    company
+        .save()
+        .then((result) =>{
+            res
+                .status(201)
+                .json(result);
+        })
+        .catch((err) => console.log(res, err, 'Something went wrong'))
+})
 
-// app.post('/companies', (req, res) => {
-//     const company = new Company(req.body);
-//     company
-//         .save()
-//         .then((result) =>{
-//             res
-//                 .status(201)
-//                 .json(result);
-//         })
-//         .catch((err) => console.log(res, err, 'Something went wrong'))
-// })
+*/
 
 app.post('/companies', (req, res) =>{
+    console.log('POST')
     db
         .collection('companies')
         .insertOne(req.body)
@@ -43,7 +45,8 @@ app.post('/companies', (req, res) =>{
                 .status(201)
                 .json(result);
         })
-        .catch(() => { handleError (res, "Something went srong")})
-})
+        .catch(() => { handleError (res, "Something went wrong")})
+
+});
 
 
