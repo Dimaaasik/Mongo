@@ -1,6 +1,6 @@
-const mongose = require('mongoose');
+const mongoose = require('mongoose');
 
-const Schema = mongose.Schema
+const Schema = mongoose.Schema
 
 const companySchema = new Schema({
     founder:{
@@ -22,6 +22,6 @@ const companySchema = new Schema({
     }
 )
 
-const Company = mongose.model('companies', companySchema)
+const Companies = mongoose.model('companies', companySchema)
 
-module.exports = Company
+module.exports = Companies
